@@ -8,4 +8,4 @@ assignees: ''
 ---
 
 Please use the discussions tab to ask any questions you have about the extension.
-https://github.com/IBM/solution-builder-vscode-extension/discussions
+https://github.com/IBM/deployable-architecture-builder-vscode-extension/discussions
