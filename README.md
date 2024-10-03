@@ -52,6 +52,10 @@ You can also retrieve logs later by right-clicking on the manifest file and sele
 
 If you see an error about signing into GitHub Enterprise, set the GitHub Enterprise server in Settings -> Settings -> Extensions -> GitHub Enterprise Server Authentication Provider in the URI field to `https://github.ibm.com`.
 
+### Getting logged out
+
+There's an error that might occur when you sign in to IBM Cloud via the extension. This error might happen because after you first install the extension from the marketplace and attempt to sign in, the authentication might not stick. So, you will see that you're signed in but then are signed out shortly after. To fix this issue, restart VS Code and attempt to sign in again.
+
 ### Extension logs
 
 All logs for the extension can be found in the **Output** view in the `IBM Cloud Deployable Architecture Builder` channel. You can change the log level by using the `Developer: Set Log Level` command in the Command Palette.
