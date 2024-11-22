@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IBM_Cloud_Project_DA_Configuration_Update_V1",
+  "$id": "IBM_Cloud_Project_DA_Configuration_Update_V1.0.0",
+  "description": "Schema for use when updating IBM Cloud project deployable architecture configurations",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The configuration name. It's unique within the account across projects and regions.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_ ]*$"
+    },
+    "description": {
+      "type": "string",
+      "description": "A project configuration description.",
+      "minLength": 0,
+      "maxLength": 1024,
+      "pattern": "^$|^(?!\\s)(?!.*\\s$)[^\\x00-\\x1F]*$"
+    },
+    "locator_id": {
+      "type": "string",
+      "description": "A unique concatenation of the catalog ID and the version ID that identify the deployable architecture in the catalog.",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!\\s)(?!.*\\s$)[\\.0-9a-z-A-Z_-]+$"
+    },
+    "authorizations": {
+      "type": "object",
+      "description": "The authorization details. You can authorize by using a trusted profile or an API key in Secrets Manager.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["api_key", "trusted_profile"]
+        },
+        "api_key": {
+          "type": "string",
+          "description": "The IBM Cloud API Key. It can be either raw or pulled from the catalog via a CRN or JSON blob.",
+          "minLength": 0,
+          "maxLength": 512,
+          "pattern": "^(?!\\s)(?!.*\\s$)[^`<>\\x00-\\x1F]*$"
+        },
+        "trusted_profile_id": {
+          "type": "string",
+          "description": "The trusted profile ID.",
+          "minLength": 0,
+          "maxLength": 512,
+          "pattern": "^(?!\\s)(?!.*\\s$)[^`<>\\x00-\\x1F]*$"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "method",
+            "api_key"
+          ]
+        },
+        {
+          "required": [
+            "method",
+            "trusted_profile_id"
+          ]
+        }
+      ]
+    },
+    "inputs": {
+      "type": "object",
+      "description": "The input variables that are used for configuration definition and environment."
+    },
+    "compliance_profile": {
+      "type": "object",
+      "description": "The profile that is required for compliance.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID for the compliance profile.",
+          "minLength": 0,
+          "maxLength": 128,
+          "pattern": "^[\\.\/:a-zA-Z0-9\\.\\-]+$"
+        },
+        "instance_id": {
+          "type": "string",
+          "description": "A unique ID for the instance of a compliance profile.",
+          "minLength": 0,
+          "maxLength": 128,
+          "pattern": "^[\\.\/:a-zA-Z0-9\\.\\-]+$"
+        },
+        "instance_location": {
+          "type": "string",
+          "description": "The location of the compliance instance.",
+          "enum": ["us-south", "us-east", "eu-gb", "eu-de", "ca-tor"]
+        },
+        "attachment_id": {
+          "type": "string",
+          "description": "A unique ID for the attachment to a compliance profile.",
+          "minLength": 0,
+          "maxLength": 128,
+          "pattern": "^[\\.\/:a-zA-Z0-9\\.\\-]+$"
+        },
+        "profile_name": {
+          "type": "string",
+          "description": "The name of the compliance profile.",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^(?!\\s)(?!.*\\s$)[^`<>\\x00-\\x1F]*$"
+        }
+      }
+    },
+    "environment_id": {
+      "type": "string",
+      "description": "The ID of the project environment.",
+      "minLength": 0,
+      "maxLength": 128,
+      "pattern": "^[\\.\\-0-9a-zA-Z]+$"
+    },
+    "settings": {
+      "type": "object",
+      "description": "The Schematics environment variables to use to deploy the configuration. Settings are only available if they are specified when the configuration is initially created."
+    }
+  },
+  "required": [
+      "name",
+      "authorizations"
+  ]
+}
