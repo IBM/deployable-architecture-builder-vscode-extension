@@ -3,6 +3,7 @@
 IBM Cloud Deployable Architecture Builder extension for [Visual Studio Code](https://code.visualstudio.com/) assists infrastructure as code (IaC) developers to create and maintain deployable architectures by combining capabilities that are found in [IBM Cloud](https://cloud.ibm.com) Projects, Global Catalog, and Schematics. Deployable architectures can have one or more architecture variations and multiple configurations for those architectures based on the customer business needs. For more information, see [What are modules and deployable architectures?](https://cloud.ibm.com/docs/secure-enterprise?topic=secure-enterprise-understand-module-da).
 
 Use this extension to:
+
 - Develop a deployable architecture from a locally-cloned Terraform module.
 - Develop a new version of an existing deployable architecture in a public or private catalog.
 - Onboard and validate deployable architectures in IBM Cloud from within the extension and monitor validation progress by using VS Code Output channel logging.
@@ -22,9 +23,44 @@ After logging in, the projects and catalogs in that account will be shown in the
 
 ## Features
 
+After you confirm all of the prerequisites, the following features are available. Many of these features are highlighted in the extension's walkthrough which you can open by navigating to **View** -> **Command Palette** -> **Welcome: Open Walkthrough** -> **Get started with IBM Cloud Deployable Architecture Builder** in the application's menu bar.
+
+### Create and edit project configurations
+
+You can create a configuration in a project from a deployable architecture.
+
+1. In the **Catalogs** explorer tree, right-click on a deployable architecture version and select **Add to a project**.
+2. Select an existing project or create a new one.
+3. Provide a name for the configuration.
+
+The new configuration is highlighted in the **Projects** explorer tree and a YAML file is opened containing the configuration properties that you can edit.
+
+The configuration is validated automatically as you type. Errors, warnings, and informational messages are shown via squiggles and in the **Problems** view. You can also use completions and quick fixes to quickly and easily edit your configuration. Changes are automatically synced with IBM Cloud whenever you save. Changes from IBM Cloud are automatically synced in the background on an interval.
+
+You can also edit existing configurations by right-clicking on them in the **Projects** explorer tree and selecting **Edit configuration**.
+
+Configuration editing features are managed in a language server. To see errors, warnings, and informational messages from the language server, open the **IBM Cloud Deployable Architecture Builder Language Server** Output channel in the **Output** view.
+
+### Insert references in configurations
+
+You can insert references to properties in other configurations or to secrets in IBM Cloud Secrets Manager.
+
+- When editing a configuration YAML file, bring up the code assist menu on an input property's value and select **Add reference**. Follow the prompts.
+- When editing an API key or trusted profile ID under _authorizations_, bring up the code assist menu and select **Add a secret**. Follow the prompts.
+
+References are automatically validated. An informational squiggly and associated **Problems** view entry indicates if the reference is valid.
+
+### Stack configurations
+
+You can manage stack configurations and their members in the **Projects** explorer tree in multiple ways.
+
+- Select one or more configurations, right-click on them, and select **Stack**. Follow the prompts to create a new stack configuration or to select an existing one.
+- To add configurations to an existing stack, select one or more configurations and drag them to the stack.
+- To remove configurations from a stack, select the configurations under the stack that you want to remove and drag them to the **Configurations** node.
+
 ### Validating a deployable architecture on IBM Cloud
 
-After you confirm all of the prerequisites, you can validate your deployable architecture. To validate a local Terraform module as a deployable architecture on IBM Cloud use the following steps.
+To validate a local Terraform module as a deployable architecture on IBM Cloud use the following steps.
 
 1. Right-click on your module folder in the workspace in VS Code. The extension expects the folder to contain a `main.tf` or `variables.tf` file. If there isn't one, you will get an error.
 2. Select **IBM Cloud** > **Add deployable architecture manifest files**. The manifest files are created. If you already have an `ibm_catalog.json` file, it will be used instead.
@@ -39,12 +75,12 @@ You can also retrieve logs later by right-clicking on the manifest file and sele
 
 ## Additional features
 
-*   In the explorer trees, you can right-click on a project, configuration, environment, catalog, or deployable architecture product to open the item in a browser or view documentation for a deployable architecture.
-*   In the **Projects** explorer tree, right-click on a configuration to validate, approve, deploy, or show the latest logs.
-*   In the **Catalogs** explorer tree, right-click on a deployable architecture version to validate it using a project or show validation logs.
-*   Additional menu items when right-clicking on a manifest JSON or YAML inputs file:
-    *   Share a deployable architecture in a private catalog by using a release branch.
-    *   Delete a deployable architecture
+- In the explorer trees, you can right-click on a project, configuration, environment, catalog, or deployable architecture product to open the item in a browser or view documentation for a deployable architecture.
+- In the **Projects** explorer tree, right-click on a configuration to validate, approve, deploy, or show the latest logs.
+- In the **Catalogs** explorer tree, right-click on a deployable architecture version to validate it using a project or show validation logs.
+- Additional menu items when right-clicking on a manifest JSON or YAML inputs file:
+    - Share a deployable architecture in a private catalog by using a release branch.
+    - Delete a deployable architecture
 
 ## Troubleshooting
 
