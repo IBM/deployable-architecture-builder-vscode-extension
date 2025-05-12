@@ -84,6 +84,10 @@ You can also retrieve logs later by right-clicking on the manifest file and sele
 
 ## Troubleshooting
 
+### Signing into IBM Cloud in multiple VS Code windows
+
+There is a known issue that causes errors and unexpected behavior when signing into an IBM Cloud account in multiple windows in VS Code. A subsequent patch will address this issue.
+
 ### Error signing into GitHub Enterprise
 
 If you see an error about signing into GitHub Enterprise, set the GitHub Enterprise server in Settings -> Settings -> Extensions -> GitHub Enterprise Server Authentication Provider in the URI field to `https://github.ibm.com`.
