@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IBM_Cloud_Project_Stack_Definition_Update_V1",
+  "$id": "IBM_Cloud_Project_StackDefinition_Update_V1.0.0",
+  "description": "Schema for use when updating IBM Cloud project stack definitions",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "description": "Defines the inputs that users need to configure at the stack level. These inputs are included in the catalog entry when the deployable architecture stack is exported to a private catalog.",
+      "minItems": 0,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The stack definition input name.",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_ ]*$"
+          },
+          "type": {
+            "type": "string",
+            "description": "The variable type.",
+            "minLength": 1,
+            "maxLength": 128,
+            "enum": ["array","boolean","float","int","number","password","string","object"]
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the variable.",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^$|^(?!\\s)(?!.*\\s$)[^\\x00-\\x1F]*$"
+          },
+          "default": {
+            "type": "string",
+            "description": "This property can be any value - a string, number, boolean, array, or object."
+          },
+          "required": {
+            "type": "boolean",
+            "description": "A boolean value to denote if the property is required"
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "A boolean value to denote whether the property is hidden, as in not exposed to the user."
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "The outputs associated with this stack definition",
+      "minItems": 0,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The stack definition output name",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^(?!\\s)(?!.*\\s$).+$"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value of the stack definition output"
+          }
+        }
+      }
+    }
+  }
+}
