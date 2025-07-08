@@ -30,7 +30,7 @@
           "description": {
             "type": "string",
             "description": "The description of the variable.",
-            "minLength": 1,
+            "minLength": 0,
             "maxLength": 128,
             "pattern": "^$|^(?!\\s)(?!.*\\s$)[^\\x00-\\x1F]*$"
           },
